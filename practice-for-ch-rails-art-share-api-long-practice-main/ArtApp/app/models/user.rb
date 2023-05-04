@@ -11,9 +11,8 @@ class User < ApplicationRecord
     validates :name, uniqueness:true, presence: true
 
     has_many :artworks,
-        foreign_key: :artist_id,
-        class_name: :Artwork,
-        dependent: :destroy
+        dependent: :destroy,
+        inverse_of: :artist
 
     has_many :artworkshares,
         foreign_key: :viewer_id,

@@ -13,8 +13,7 @@ class Artwork < ApplicationRecord
     validates_uniqueness_of :artist_id, scope: :title 
 
     belongs_to :artist,
-        foreign_key: :artist_id,
-        class_name: :User 
+        class_name: :User
     
     has_many :artworkshare,
         foreign_key: :artwork_id,
