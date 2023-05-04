@@ -24,12 +24,15 @@ class LikesController < ApplicationController
     end
 
     def create
+        debugger
     end
 
     def destroy
+        @like = Like.where()
     end
 
     def like_params 
-
+        #liker_id, likeable_type, likeable_id
+        params.require(:like).permit(:user_id,:likeable_id)
     end
 end
