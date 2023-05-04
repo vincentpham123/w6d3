@@ -2067,3 +2067,51 @@ Processing by ArtworkSharesController#destroy as */*
 Completed 200 OK in 19ms (Views: 0.2ms | ActiveRecord: 10.6ms | Allocations: 5277)
 
 
+Started GET "/users/1/artworks" for ::1 at 2023-05-04 09:57:10 -0700
+  [1m[36mActiveRecord::SchemaMigration Pluck (3.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by ArtworksController#index as */*
+  Parameters: {"user_id"=>"1"}
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.0ms | Allocations: 198)
+
+
+  
+ArgumentError (wrong number of arguments (given 0, expected 1)):
+  
+app/controllers/artworks_controller.rb:3:in `index'
+Started GET "/users/1/artworks" for ::1 at 2023-05-04 09:58:11 -0700
+Processing by ArtworksController#index as */*
+  Parameters: {"user_id"=>"1"}
+  [1m[36mArtwork Load (37.5ms)[0m  [1m[34mSELECT "artworks"."title", "artworks"."image_url" FROM "artworks" INNER JOIN "users" ON "users"."id" = "artworks"."artist_id" WHERE (artworks.artist_id = '1')[0m
+  ↳ app/controllers/artworks_controller.rb:8:in `index'
+Completed 200 OK in 187ms (Views: 53.1ms | ActiveRecord: 73.1ms | Allocations: 11917)
+
+
+Started GET "/artworks" for ::1 at 2023-05-04 09:58:31 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/artworks"):
+  
+  [1m[36mArtwork Load (3.6ms)[0m  [1m[34mSELECT "artworks"."title", "artworks"."image_url" FROM "artworks" WHERE (id IN (
+                SELECT id
+                FROM artworks
+                LEFT JOIN users ON users.id = artworks.artist_id
+                LEFT JOIN artwork_shares ON artwork_shares.viewer_id = artworks.artist_id
+                WHERE artwork_shares.viewer_id = 1
+                    OR user.id = 1
+            ))[0m
+  [1m[36mArtwork Load (8.5ms)[0m  [1m[34mSELECT "artworks"."title", "artworks"."image_url" FROM "artworks" WHERE (id IN (
+                SELECT id
+                FROM artworks
+                LEFT JOIN users ON users.id = artworks.artist_id
+                LEFT JOIN artwork_shares ON artwork_shares.viewer_id = artworks.artist_id
+                WHERE artwork_shares.viewer_id = 1
+                    OR user.id = 1
+            )) /* loading for inspect */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mArtwork Load (1.0ms)[0m  [1m[34mSELECT "artworks"."title", "artworks"."image_url" FROM "artworks" WHERE (artist_id = 1)[0m
+  [1m[36mArtwork Load (14.5ms)[0m  [1m[34mSELECT "artworks".* FROM "artworks"[0m
+  [1m[36mArtwork Load (4.9ms)[0m  [1m[34mSELECT "artworks"."title", "artworks"."image_url" FROM "artworks" WHERE (artist_id = 1)[0m
+  [1m[36mArtwork Load (0.3ms)[0m  [1m[34mSELECT "artworks"."id", "artworks"."title", "artworks"."image_url" FROM "artworks" WHERE (artist_id = 1)[0m
+  [1m[36mArtwork Load (1.4ms)[0m  [1m[34mSELECT "artworks"."id", "artworks"."title", "artworks"."image_url" FROM "artworks" INNER JOIN "artwork_shares" ON "artwork_shares"."artwork_id" = "artworks"."id" WHERE (artwork_shares.viewer_id = 1)[0m
+  [1m[36mArtwork Load (19.8ms)[0m  [1m[34mSELECT "artworks"."id", "artworks"."title", "artworks"."image_url" FROM "artworks" INNER JOIN "artwork_shares" ON "artwork_shares"."artwork_id" = "artworks"."id" WHERE (artwork_shares.viewer_id = 1)[0m
+  [1m[36mArtwork Load (2.5ms)[0m  [1m[34mSELECT "artworks"."id", "artworks"."title", "artworks"."image_url" FROM "artworks" INNER JOIN "artwork_shares" ON "artwork_shares"."artwork_id" = "artworks"."id" WHERE (artist_id = 1) AND (artwork_shares.viewer_id = 1)[0m
+  [1m[36mArtwork Load (0.5ms)[0m  [1m[34mSELECT "artworks"."id", "artworks"."title", "artworks"."image_url" FROM "artworks" WHERE (artist_id = 1)[0m
+  [1m[36mArtwork Load (0.6ms)[0m  [1m[34mSELECT "artworks"."id", "artworks"."title", "artworks"."image_url" FROM "artworks" INNER JOIN "artwork_shares" ON "artwork_shares"."artwork_id" = "artworks"."id" WHERE (artwork_shares.viewer_id = 1)[0m
