@@ -12,6 +12,11 @@ Rails.application.routes.draw do
         end
     end
 
+    resources :users do 
+      member do
+        get 'favorites'
+      end
+    end
     
     resources :artworks, only: [:destroy, :create, :show, :update] do
         resources :comments, only: [:index]

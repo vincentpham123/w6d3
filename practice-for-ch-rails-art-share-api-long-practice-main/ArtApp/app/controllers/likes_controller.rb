@@ -27,22 +27,22 @@ class LikesController < ApplicationController
         else
             render json: @like.errors.full_message, status: :unprocessable_entity 
         end
-
     end
 
     def destroy
         @like = Like.where(params[:id])
         @like.destroy 
         render json: @like 
-        redirect_to artwork_url(id)
+        # redirect_to artwork_url(id)
     end
 
     def id 
         id = params[:artwork_id] ? params[:artwork_id] : params[:comment_id]
         id
     end
+
     def type 
-        params[:artwork_id] ? 'Artwork'| 'Comment'
+        params[:artwork_id] ? 'Artwork' : 'Comment'
     end
 
     def like_params 

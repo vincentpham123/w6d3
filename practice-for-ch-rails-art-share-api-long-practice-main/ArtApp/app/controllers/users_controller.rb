@@ -43,6 +43,11 @@ class UsersController < ApplicationController
         end
     end
 
+    def favorites
+        @favs = User.favorites(params[:id])
+        render json: @favs
+    end
+
     private
     def user_params
         params.require(:user).permit(:name)

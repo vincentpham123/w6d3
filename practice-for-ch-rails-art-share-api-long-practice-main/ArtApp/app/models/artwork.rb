@@ -8,6 +8,7 @@
 #  artist_id  :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  favorite   :boolean          default(FALSE)
 #
 class Artwork < ApplicationRecord
     validates_uniqueness_of :artist_id, scope: :title 

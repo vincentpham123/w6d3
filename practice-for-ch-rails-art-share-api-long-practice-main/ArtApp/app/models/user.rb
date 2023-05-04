@@ -46,4 +46,20 @@ class User < ApplicationRecord
         through: :likes,
         source: :likeable,
         source_type: :Comment
+
+    def favorites(user_id)
+        own_favs = User
+            .select('artworks.*')
+            .joins(:artworks)
+            .where('artworks.favorite = TRUE AND id = ?', user_id)
+
+        shared_favs = User
+            .select('artworks.*')
+            .joins(:shared_artworks)
+            .where('artwork_shares.favorite = TRUE AND id = ?', user_id)
+        
+        own_favs + shared_favs
+        
+    end
+    
 end

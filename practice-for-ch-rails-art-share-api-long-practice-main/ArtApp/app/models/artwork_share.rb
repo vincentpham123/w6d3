@@ -7,6 +7,7 @@
 #  viewer_id  :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  favorite   :boolean          default(FALSE)
 #
 class ArtworkShare < ApplicationRecord
     belongs_to :artwork
