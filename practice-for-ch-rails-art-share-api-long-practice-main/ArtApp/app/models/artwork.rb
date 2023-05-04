@@ -16,14 +16,14 @@ class Artwork < ApplicationRecord
         foreign_key: :artist_id,
         class_name: :User
     
-    has_many :artworkshare,
-        foreign_key: :artwork_id,
-        class_name: :ArtworkShare,
+    has_many :artwork_shares,
         dependent: :destroy,
         inverse_of: :artwork
-    
+        # foreign_key: :artwork_id,
+        # class_name: :ArtworkShare,
+        
     has_many :shared_viewers,
-        through: :artworkshare,
+        through: :artwork_shares,
         source: :viewer
     
     has_many :comments,
@@ -31,6 +31,9 @@ class Artwork < ApplicationRecord
         class_name: :Comment,
         dependent: :destroy,
         inverse_of: :artwork
+    
+    has_many :likes,
+        as: :likeable
 
     def self.artworks_for_user_id(user_id)
         artist_works = Artwork

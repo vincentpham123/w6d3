@@ -1,8 +1,15 @@
 class UsersController < ApplicationController
 
     def index  
-        @users = User.all
+        
+        if params.has_key?(:name)
+            name = "%#{params[:name]}%"
+            @users = User.where("LOWER(name) LIKE ? ", name.downcase)
+        else
+            @users = User.all
+        end
         render json: @users 
+
     end        
 
     def create

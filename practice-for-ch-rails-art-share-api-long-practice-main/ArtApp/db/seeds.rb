@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 # ApplicationRecord.transaction do
 ArtworkShare.destroy_all
+Like.destroy_all
 Comment.destroy_all
 Artwork.destroy_all    
 User.destroy_all    
@@ -35,4 +36,8 @@ Comment.create!(author_id:1 ,artwork_id: 4, body: ':)')
 Comment.create!(author_id: 2,artwork_id:3 , body: ':o')
 Comment.create!(author_id:3 ,artwork_id: 2, body: 'orz')
 Comment.create!(author_id: 1,artwork_id:1 , body: 'AMAZING!!!')
+
+Like.create!(liker_id:1 , likeable_type: 'Artwork' , likeable_id: 1 )
+Like.create!(liker_id:1 , likeable_type: 'Artwork' , likeable_id: 4 )
+Like.create!(liker_id:1 , likeable_type: 'Comment' , likeable_id: 4 )
 # end
