@@ -7,6 +7,7 @@
 #   Character.create(name: "Luke", movie: movies.first)
 # ApplicationRecord.transaction do
 ArtworkShare.destroy_all
+Comment.destroy_all
 Artwork.destroy_all    
 User.destroy_all    
 
@@ -14,6 +15,7 @@ User.destroy_all
 ApplicationRecord.connection.reset_pk_sequence!('users')
 ApplicationRecord.connection.reset_pk_sequence!('artworks')
 ApplicationRecord.connection.reset_pk_sequence!('artwork_shares')
+ApplicationRecord.connection.reset_pk_sequence!('comments')
 # end
 
 User.create!(name: 'Paulo')
@@ -28,4 +30,9 @@ Artwork.create!(title: 'Stary Night',image_url: 'VanGogh.com', artist_id:1)
 ArtworkShare.create!(artwork_id:1, viewer_id:2)
 ArtworkShare.create!(artwork_id:2, viewer_id:3)
 ArtworkShare.create!(artwork_id:3, viewer_id:1)
+
+Comment.create!(author_id:1 ,artwork_id: 4, body: ':)')
+Comment.create!(author_id: 2,artwork_id:3 , body: ':o')
+Comment.create!(author_id:3 ,artwork_id: 2, body: 'orz')
+Comment.create!(author_id: 1,artwork_id:1 , body: 'AMAZING!!!')
 # end

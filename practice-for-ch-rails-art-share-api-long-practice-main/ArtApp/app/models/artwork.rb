@@ -2,10 +2,10 @@
 #
 # Table name: artworks
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  title      :string           not null
 #  image_url  :string           not null
-#  artist_id  :integer          not null
+#  artist_id  :bigint           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
@@ -13,16 +13,24 @@ class Artwork < ApplicationRecord
     validates_uniqueness_of :artist_id, scope: :title 
 
     belongs_to :artist,
+        foreign_key: :artist_id,
         class_name: :User
     
     has_many :artworkshare,
         foreign_key: :artwork_id,
         class_name: :ArtworkShare,
-        dependent: :destroy
+        dependent: :destroy,
+        inverse_of: :artwork
     
     has_many :shared_viewers,
         through: :artworkshare,
         source: :viewer
+    
+    has_many :comments,
+        foreign_key: :artwork_id,
+        class_name: :Comment,
+        dependent: :destroy,
+        inverse_of: :artwork
 
     def self.artworks_for_user_id(user_id)
         artist_works = Artwork
