@@ -40,4 +40,7 @@ Comment.create!(author_id: 1,artwork_id:1 , body: 'AMAZING!!!')
 Like.create!(liker_id:1 , likeable_type: 'Artwork' , likeable_id: 1 )
 Like.create!(liker_id:1 , likeable_type: 'Artwork' , likeable_id: 4 )
 Like.create!(liker_id:1 , likeable_type: 'Comment' , likeable_id: 4 )
+Like.create!(liker_id:2 , likeable_type: 'Artwork' , likeable_id: 3 )
+Like.create!(liker_id:2 , likeable_type: 'Comment' , likeable_id: 2 )
+Like.create!(liker_id:3 , likeable_type: 'Artwork' , likeable_id: 3 )
 # end

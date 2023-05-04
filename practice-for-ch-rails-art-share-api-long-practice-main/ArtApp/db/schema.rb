@@ -47,7 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_204421) do
 
   create_table "likes", force: :cascade do |t|
     t.bigint "liker_id", null: false
-    t.string "likeable_type", null: false #class_name: Artwork, Comment
+    t.string "likeable_type", null: false
     t.bigint "likeable_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

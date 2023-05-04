@@ -19,4 +19,6 @@ class Comment < ApplicationRecord
         class_name: :Artwork
     has_many :likes,
         as: :likeable
+
+    
 end

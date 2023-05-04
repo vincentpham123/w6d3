@@ -37,6 +37,13 @@ class User < ApplicationRecord
         dependent: :destroy,
         inverse_of: :liker
     
+    has_many :liked_artworks,
+        through: :likes,
+        source: :likeable,
+        source_type: :Artwork
     
-
+    has_many :liked_comments,
+        through: :likes,
+        source: :likeable,
+        source_type: :Comment
 end
